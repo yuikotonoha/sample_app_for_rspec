@@ -1,18 +1,33 @@
 require 'rails_helper'
 
 RSpec.describe Task, type: :model do
-  context "titleとstatusを指定しているとき" do
-    it "タスクが作られる" do
-      task = Task.new(title: "kotonoha", status: 0)
-      expect(task).to be_valid
-    end
-  end
-
-  context "titleを指定してない時" do
-    it "エラーが表示" do
-      task = Task.new(status: 0)
+  let(:task) { FactoryBot.build(:task, title: title, status: status) }
+  context 'titleが空の時に' do
+    let(:status) { 1 }
+    let(:title) { }
+    it 'エラーになる' do
       task.valid?
       expect(task.errors.messages[:title]).to include "can't be blank"
     end
   end
+
+  context 'statusが空の時に' do
+    let(:status) { }
+    let(:title) { 'ことのはのタスクタイトル' }
+    it 'エラーになる' do
+      task.valid?
+      expect(task.errors.messages[:status]).to include "can't be blank"
+    end
+  end
+
+  context 'titleが重複した時に' do
+    let(:title) { 'ことのはのタスクタイトル' }
+    let(:status) { 1 }
+    it 'エラーになる' do
+      Task.create!(title: 'ことのはのタスクタイトル', status: 0)
+      task.valid?
+      expect(task.errors.messages[:title]).to include "has already been taken"
+    end
+  end
+
 end
