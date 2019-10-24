@@ -24,7 +24,7 @@ RSpec.describe Task, type: :model do
     let(:title) { 'ことのはのタスクタイトル' }
     let(:status) { 1 }
     it 'エラーになる' do
-      Task.create!(title: 'ことのはのタスクタイトル', status: 0)
+      Task.create!(title: title, status: 0)
       task.valid?
       expect(task.errors.messages[:title]).to include "has already been taken"
     end
