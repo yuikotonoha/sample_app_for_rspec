@@ -1,0 +1,15 @@
+current directory: /Users/kishimotokouta/Desktop/runteq/sample_app_for_rspec/vendor/bundle/ruby/2.6.0/gems/debug_inspector-0.0.3/ext/debug_inspector
+/Users/kishimotokouta/.rbenv/versions/2.6.4/bin/ruby -I /Users/kishimotokouta/.rbenv/versions/2.6.4/lib/ruby/site_ruby/2.6.0 -r ./siteconf20191024-36725-18fxazu.rb extconf.rb
+creating Makefile
+
+current directory: /Users/kishimotokouta/Desktop/runteq/sample_app_for_rspec/vendor/bundle/ruby/2.6.0/gems/debug_inspector-0.0.3/ext/debug_inspector
+make "DESTDIR=" clean
+
+current directory: /Users/kishimotokouta/Desktop/runteq/sample_app_for_rspec/vendor/bundle/ruby/2.6.0/gems/debug_inspector-0.0.3/ext/debug_inspector
+make "DESTDIR="
+compiling debug_inspector.c
+linking shared-object debug_inspector.bundle
+
+current directory: /Users/kishimotokouta/Desktop/runteq/sample_app_for_rspec/vendor/bundle/ruby/2.6.0/gems/debug_inspector-0.0.3/ext/debug_inspector
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 debug_inspector.bundle ./.gem.20191024-36725-rj34qw
