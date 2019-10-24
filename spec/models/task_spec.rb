@@ -29,5 +29,4 @@ RSpec.describe Task, type: :model do
       expect(task.errors.messages[:title]).to include "has already been taken"
     end
   end
-
 end
