@@ -6,7 +6,7 @@ RSpec.describe Task, type: :model do
     let(:status) { 1 }
     let(:title) { }
     it 'エラーになる' do
-      task.valid?
+      expect(task).not_to be_valid
       expect(task.errors.messages[:title]).to include "can't be blank"
     end
   end
@@ -15,7 +15,7 @@ RSpec.describe Task, type: :model do
     let(:status) { }
     let(:title) { 'ことのはのタスクタイトル' }
     it 'エラーになる' do
-      task.valid?
+      expect(task).not_to be_valid
       expect(task.errors.messages[:status]).to include "can't be blank"
     end
   end
@@ -25,7 +25,7 @@ RSpec.describe Task, type: :model do
     let(:status) { 1 }
     it 'エラーになる' do
       Task.create!(title: title, status: 0)
-      task.valid?
+      expect(task).not_to be_valid
       expect(task.errors.messages[:title]).to include "has already been taken"
     end
   end
