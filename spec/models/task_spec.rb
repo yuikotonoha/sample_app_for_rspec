@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Task, type: :model do
-  let(:task) { FactoryBot.build(:task, title: title, status: status) }
+  let(:task) { build(:task, title: title, status: status) }
   context 'titleが空の時に' do
     let(:status) { 1 }
     let(:title) { }
