@@ -45,4 +45,22 @@ RSpec.describe 'Tasks', type: :system do
     end
   end
 
+  describe 'ログイン後' do
+    let(:kotonoha) { create :user }
+    context 'タスク一覧で Destroy のリンクをクリックすれば' do
+      it 'タスクの削除ができる' do
+        # kotonohaとして操作
+        login(kotonoha)
+        Task.create!(title: '課題16', status: 0, user_id: 1)
+        # タスク一覧画面を開く
+        visit root_path
+        # Destroyボタンをクリックする
+        click_link 'Destroy'
+        page.driver.browser.switch_to.alert.accept
+        # タスクの削除に成功したことを検証する
+        expect(page).to have_content 'Task was successfully destroyed.'
+      end
+    end
+  end
+
 end
