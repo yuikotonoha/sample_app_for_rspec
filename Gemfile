@@ -18,7 +18,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'pry-byebug'
   gem 'capybara'
-  gem 'selenium-webdriver'
+  gem 'webdrivers'
 end
 
 group :development do
