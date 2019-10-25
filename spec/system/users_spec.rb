@@ -19,13 +19,33 @@ RSpec.describe 'Users', type: :system do
     end
   end
 
-  describe 'ログイン前' do
+  describe 'ログイン後' do
+    let(:kotonoha) { create :user }
     context '入力値が正常' do
-      before do
-        # ユーザを作成する
-        create(:user)
+      it 'ユーザーの編集ができる' do
+        # kotonohaとして操作
+        login(kotonoha)
+        # プロフィール編集を開く
+        visit edit_user_path(kotonoha)
+        # プロフィール編集で入力をする
+        fill_in 'user[email]', with: 'kotonoha2@gmail.com'
+        fill_in 'user[password]', with: 'password2'
+        fill_in 'user[password_confirmation]', with: 'password2'
+        # Updateボタンをクリックする
+        click_button("Update")
+        # プロフィール更新に成功したことを検証する
+        expect(page).to have_content 'User was successfully updated.'
       end
-      it 'ログインできる' do
+    end
+  end
+
+  describe 'ログイン前' do
+    before do
+      # ユーザを作成する
+      @user = create(:user)
+    end
+    context '入力値が正常' do
+      it 'ログインが成功する' do
         # トップページを開く
         visit login_path
         # ログインフォームにEmailとパスワードを入力する
@@ -38,19 +58,6 @@ RSpec.describe 'Users', type: :system do
       end
     end
   end
-
-      # it 'ログインできる' do
-      #   # プロフィール編集を開く
-      #   visit edit_user_path(@user)
-      #   # ログインフォームにEmailとパスワードを入力する
-      #   fill_in 'user[email]', with: 'kotonoha2@gmail.com'
-      #   fill_in 'user[password]', with: 'password2'
-      #   fill_in 'user[password_confirmation]', with: 'password2'
-      #   # Updateボタンをクリックする
-      #   click_button("Update")
-      #   # プロフィール更新に成功したことを検証する
-      #   expect(page).to have_content 'User was successfully updated.'
-      # end
 
 
 end
