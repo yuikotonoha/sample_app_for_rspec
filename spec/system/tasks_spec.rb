@@ -11,14 +11,36 @@ RSpec.describe 'Tasks', type: :system do
         # タスクの新規作成画面を開く
         visit new_task_path
         # タスクの新規作成画面で入力をする
-        fill_in 'task[title]', with: 'kotonoha2@gmail.com'
-        fill_in 'task[content]', with: 'password2'
+        fill_in 'task[title]', with: 'RUNTEQ応用課題16'
+        fill_in 'task[content]', with: 'systen specを書く'
         select 'todo', from: 'Status'
         fill_in 'task[deadline]', with: Time.new(2020, 01, 02, 12)
         # Updateボタンをクリックする
         click_button("Create Task")
         # タスクの新規作成に成功したことを検証する
         expect(page).to have_content 'Task was successfully created.'
+      end
+    end
+  end
+
+  describe 'ログイン後' do
+    let(:kotonoha) { create :user }
+    let(:test_task) { create :task, user_id: 1 }
+    context '入力値が正常' do
+      it 'タスクの編集ができる' do
+        # kotonohaとして操作
+        login(kotonoha)
+        # タスクの新規作成画面を開く
+        visit edit_task_path(test_task)
+        # タスクの新規作成画面で入力をする
+        fill_in 'task[title]', with: 'RUNTEQ応用課題16'
+        fill_in 'task[content]', with: 'タスクを編集する'
+        select 'todo', from: 'Status'
+        fill_in 'task[deadline]', with: Time.new(2040, 01, 02, 12)
+        # Updateボタンをクリックする
+        click_button("Update Task")
+        # タスクの新規作成に成功したことを検証する
+        expect(page).to have_content 'Task was successfully updated.'
       end
     end
   end
