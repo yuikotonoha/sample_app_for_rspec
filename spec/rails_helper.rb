@@ -70,4 +70,5 @@ RSpec.configure do |config|
 
   # spec/support/ 配下のモジュールを読み込む
   config.include LoginMacros
+  config.include TaskMacros
 end

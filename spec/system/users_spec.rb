@@ -39,6 +39,22 @@ RSpec.describe 'Users', type: :system do
     end
   end
 
+  describe 'ログイン後' do
+    let(:kotonoha) { create :user }
+    context 'マイページにアクセス' do
+      it '新規作成したタスクが表示されている' do
+        # kotonohaとして操作
+        login(kotonoha)
+        # タスクを1件作成
+        task_create
+        # プロフィール編集を開く
+        visit user_path(kotonoha)
+        # 他のユーザーのプロフィール編集ページへアクセスが失敗したことを検証する
+        expect(page).to have_content "RUNTEQ応用課題16"
+      end
+    end
+  end
+
   describe 'ログイン前' do
     context 'メールアドレスが未入力時に' do
       it 'ユーザーの新規作成が失敗する' do
