@@ -50,7 +50,7 @@ RSpec.describe 'Tasks', type: :system do
       it 'タスクの削除ができる' do
         # kotonohaとして操作
         login(kotonoha)
-        Task.create!(title: '課題16', status: 0, user_id: 1)
+        Task.create!(title: '課題16', status: :todo, user_id: 1)
         # タスク一覧画面を開く
         visit root_path
         # Destroyボタンをクリックする
@@ -76,7 +76,7 @@ RSpec.describe 'Tasks', type: :system do
   describe 'ログイン前' do
     context 'タスクの編集ページへの' do
       it 'アクセスが失敗する' do
-        Task.create!(title: '課題16', status: 0)
+        Task.create!(title: '課題16', status: :todo)
         # タスクの新規作成画面を開く
         visit edit_task_path(1)
         # タスクの新規作成にアクセスできないことを検証する
