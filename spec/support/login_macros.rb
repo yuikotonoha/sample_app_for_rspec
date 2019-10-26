@@ -6,9 +6,4 @@ module LoginMacros
     click_button("Login")
     expect(page).to have_content 'Login successful'
   end
-
-  def logout
-    click_link 'ログアウト'
-    expect(page).to have_content 'ログアウトしました。'
-  end
 end
