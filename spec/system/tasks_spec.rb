@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Tasks', type: :system do
 
+  let(:kotonoha) { create :user }
+
   describe 'ログイン後' do
-    let(:kotonoha) { create :user }
     context '入力値が正常' do
       it 'タスクの新規作成ができる' do
         # kotonohaとして操作
@@ -24,7 +25,6 @@ RSpec.describe 'Tasks', type: :system do
   end
 
   describe 'ログイン後' do
-    let(:kotonoha) { create :user }
     let(:test_task) { create :task, user_id: 1 }
     context '入力値が正常' do
       it 'タスクの編集ができる' do
@@ -46,7 +46,6 @@ RSpec.describe 'Tasks', type: :system do
   end
 
   describe 'ログイン後' do
-    let(:kotonoha) { create :user }
     context 'タスク一覧で Destroy のリンクをクリックすれば' do
       it 'タスクの削除ができる' do
         # kotonohaとして操作
@@ -87,7 +86,6 @@ RSpec.describe 'Tasks', type: :system do
   end
 
   describe 'ログイン後' do
-    let(:kotonoha) { create :user }
     let(:test_task) { create :task, user_id: 2 }
     context '他のユーザーのタスク編集ページへの' do
       it 'アクセスが失敗する' do
