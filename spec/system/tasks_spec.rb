@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Tasks', type: :system do
 
   let(:kotonoha) { create :user }
+  let(:yukinoha) { create :yukinoha }
 
   describe 'ログイン後' do
     context '入力値が正常' do
@@ -86,7 +87,7 @@ RSpec.describe 'Tasks', type: :system do
   end
 
   describe 'ログイン後' do
-    let(:test_task) { create :task, user_id: 2 }
+    let(:test_task) { create :task, user_id: yukinoha.id }
     context '他のユーザーのタスク編集ページへの' do
       it 'アクセスが失敗する' do
         # kotonohaとして操作
