@@ -85,4 +85,19 @@ RSpec.describe 'Tasks', type: :system do
       end
     end
   end
+
+  describe 'ログイン後' do
+    let(:kotonoha) { create :user }
+    let(:test_task) { create :task, user_id: 2 }
+    context '他のユーザーのタスク編集ページ' do
+      it 'アクセスが失敗' do
+        # kotonohaとして操作
+        login(kotonoha)
+        # タスクの新規作成画面を開く
+        visit edit_task_path(test_task)
+        # タスクの新規作成に成功したことを検証する
+        expect(page).to have_content 'Forbidden access.'
+      end
+    end
+  end
 end

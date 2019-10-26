@@ -123,4 +123,19 @@ RSpec.describe 'Users', type: :system do
     end
   end
 
+  describe 'ログイン後' do
+    let(:kotonoha) { create :user }
+    context '他のユーザーの編集ページ' do
+      it 'アクセスが失敗' do
+        yukinoha = User.create!(email: 'yukinoha@gmail.com', password: 'password', password_confirmation: 'password' )
+        # kotonohaとして操作
+        login(kotonoha)
+        # プロフィール編集を開く
+        visit edit_user_path(yukinoha)
+        # 他のユーザーのプロフィール編集ページへアクセスが失敗したことを検証する
+        expect(page).to have_content "Forbidden access."
+      end
+    end
+  end
+
 end
