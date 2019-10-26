@@ -25,7 +25,7 @@ RSpec.describe 'Tasks', type: :system do
   end
 
   describe 'ログイン後' do
-    let(:test_task) { create :task, user_id: 1 }
+    let(:test_task) { create :task, user_id: kotonoha.id }
     context '入力値が正常' do
       it 'タスクの編集ができる' do
         # kotonohaとして操作
@@ -50,7 +50,7 @@ RSpec.describe 'Tasks', type: :system do
       it 'タスクの削除ができる' do
         # kotonohaとして操作
         login(kotonoha)
-        Task.create!(title: '課題16', status: :todo, user_id: 1)
+        Task.create!(title: '課題16', status: :todo, user_id: kotonoha.id)
         # タスク一覧画面を開く
         visit root_path
         # Destroyボタンをクリックする
