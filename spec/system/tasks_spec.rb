@@ -15,7 +15,7 @@ RSpec.describe 'Tasks', type: :system do
         fill_in 'task[content]', with: 'systen specを書く'
         select 'todo', from: 'Status'
         fill_in 'task[deadline]', with: Time.new(2020, 01, 02, 12)
-        # Updateボタンをクリックする
+        # Create Taskボタンをクリックする
         click_button("Create Task")
         # タスクの新規作成に成功したことを検証する
         expect(page).to have_content 'Task was successfully created.'
@@ -37,7 +37,7 @@ RSpec.describe 'Tasks', type: :system do
         fill_in 'task[content]', with: 'タスクを編集する'
         select 'todo', from: 'Status'
         fill_in 'task[deadline]', with: Time.new(2040, 01, 02, 12)
-        # Updateボタンをクリックする
+        # Update Taskボタンをクリックする
         click_button("Update Task")
         # タスクの新規作成に成功したことを検証する
         expect(page).to have_content 'Task was successfully updated.'
@@ -63,4 +63,26 @@ RSpec.describe 'Tasks', type: :system do
     end
   end
 
+  describe 'ログイン前' do
+    context 'タスクの新規作成ページ' do
+      it 'アクセスが失敗する' do
+        # タスクの新規作成画面を開く
+        visit new_task_path
+        # タスクの新規作成にアクセスできないことを検証する
+        expect(page).to have_content 'Login required'
+      end
+    end
+  end
+
+  describe 'ログイン前' do
+    context 'タスクの編集ページ' do
+      it 'アクセスが失敗する' do
+        Task.create!(title: '課題16', status: 0, user_id: 1)
+        # タスクの新規作成画面を開く
+        visit edit_task_path(1)
+        # タスクの新規作成にアクセスできないことを検証する
+        expect(page).to have_content 'Login required'
+      end
+    end
+  end
 end
