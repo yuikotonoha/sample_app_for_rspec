@@ -30,9 +30,9 @@ RSpec.describe 'Tasks', type: :system do
       it 'タスクの編集ができる' do
         # kotonohaとして操作
         login(kotonoha)
-        # タスクの新規作成画面を開く
+        # タスクの編集画面を開く
         visit edit_task_path(test_task)
-        # タスクの新規作成画面で入力をする
+        # タスクの編集画面で入力をする
         fill_in 'task[title]', with: 'RUNTEQ応用課題16'
         fill_in 'task[content]', with: 'タスクを編集する'
         select 'todo', from: 'Status'
