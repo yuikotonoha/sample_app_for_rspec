@@ -12,7 +12,7 @@ RSpec.describe 'Users', type: :system do
         fill_in 'user[password]', with: 'password'
         fill_in 'user[password_confirmation]', with: 'password'
         # SignUpボタンをクリックする
-        click_button("SignUp")
+        click_button('SignUp')
         # ユーザー作成が成功したことを検証する
         expect(page).to have_content 'User was successfully created.'
       end
@@ -32,7 +32,7 @@ RSpec.describe 'Users', type: :system do
         fill_in 'user[password]', with: 'password2'
         fill_in 'user[password_confirmation]', with: 'password2'
         # Updateボタンをクリックする
-        click_button("Update")
+        click_button('Update')
         # プロフィール更新に成功したことを検証する
         expect(page).to have_content 'User was successfully updated.'
       end
@@ -50,7 +50,7 @@ RSpec.describe 'Users', type: :system do
         # プロフィール編集を開く
         visit user_path(kotonoha)
         # 他のユーザーのプロフィール編集ページへアクセスが失敗したことを検証する
-        expect(page).to have_content "RUNTEQ応用課題16"
+        expect(page).to have_content 'RUNTEQ応用課題16'
       end
     end
   end
@@ -65,7 +65,7 @@ RSpec.describe 'Users', type: :system do
         fill_in 'user[password]', with: 'password'
         fill_in 'user[password_confirmation]', with: 'password'
         # SignUpボタンをクリックする
-        click_button("SignUp")
+        click_button('SignUp')
         # ユーザー作成が失敗したことを検証する
         expect(page).to have_content "Email can't be blank"
       end
@@ -85,7 +85,7 @@ RSpec.describe 'Users', type: :system do
         fill_in 'user[password]', with: 'password2'
         fill_in 'user[password_confirmation]', with: 'password2'
         # Updateボタンをクリックする
-        click_button("Update")
+        click_button('Update')
         # プロフィール更新が失敗したことを検証する
         expect(page).to have_content "Email can't be blank"
       end
@@ -101,9 +101,9 @@ RSpec.describe 'Users', type: :system do
         # 入力フォームにEmailを入力する
         fill_in 'user[email]', with: 'kotonoha@gmail.com'
         # SignUpボタンをクリックする
-        click_button("SignUp")
+        click_button('SignUp')
         # ユーザー作成が失敗したことを検証する
-        expect(page).to have_content "Email has already been taken"
+        expect(page).to have_content 'Email has already been taken'
       end
     end
   end
@@ -120,36 +120,36 @@ RSpec.describe 'Users', type: :system do
         # 入力フォームにEmailを入力する
         fill_in 'user[email]', with: 'yukinoha@gmail.com'
         # Updateボタンをクリックする
-        click_button("Update")
+        click_button('Update')
         # プロフィール更新が失敗したことを検証する
-        expect(page).to have_content "Email has already been taken"
+        expect(page).to have_content 'Email has already been taken'
       end
     end
   end
 
   describe 'ログイン前' do
-    context 'マイページ' do
-      it 'アクセスが失敗' do
+    context 'マイページへの' do
+      it 'アクセスが失敗する' do
         current_user = User.create!(email: 'kotonoha@gmail.com', password: 'password', password_confirmation: 'password' )
         # ユーザー作成画面を開く
         visit user_path(current_user)
         # マイページへのアクセスが失敗したことを検証する
-        expect(page).to have_content "Login required"
+        expect(page).to have_content 'Login required'
       end
     end
   end
 
   describe 'ログイン後' do
     let(:kotonoha) { create :user }
-    context '他のユーザーの編集ページ' do
-      it 'アクセスが失敗' do
+    context '他のユーザーの編集ページへの' do
+      it 'アクセスが失敗する' do
         yukinoha = User.create!(email: 'yukinoha@gmail.com', password: 'password', password_confirmation: 'password' )
         # kotonohaとして操作
         login(kotonoha)
         # プロフィール編集を開く
         visit edit_user_path(yukinoha)
         # 他のユーザーのプロフィール編集ページへアクセスが失敗したことを検証する
-        expect(page).to have_content "Forbidden access."
+        expect(page).to have_content 'Forbidden access.'
       end
     end
   end

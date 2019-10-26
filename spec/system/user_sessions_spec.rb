@@ -15,7 +15,7 @@ RSpec.describe 'Users', type: :system do
         fill_in 'email', with: 'kotonoha@gmail.com'
         fill_in 'password', with: 'password'
         # ログインボタンをクリックする
-        click_button("Login")
+        click_button('Login')
         # ログインに成功したことを検証する
         expect(page).to have_content 'Login successful'
       end
@@ -35,7 +35,7 @@ RSpec.describe 'Users', type: :system do
         fill_in 'email', with: ''
         fill_in 'password', with: ''
         # ログインボタンをクリックする
-        click_button("Login")
+        click_button('Login')
         # ログインに成功したことを検証する
         expect(page).to have_content 'Login failed'
       end

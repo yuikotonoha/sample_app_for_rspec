@@ -16,7 +16,7 @@ RSpec.describe 'Tasks', type: :system do
         select 'todo', from: 'Status'
         fill_in 'task[deadline]', with: Time.new(2020, 01, 02, 12)
         # Create Taskボタンをクリックする
-        click_button("Create Task")
+        click_button('Create Task')
         # タスクの新規作成に成功したことを検証する
         expect(page).to have_content 'Task was successfully created.'
       end
@@ -38,7 +38,7 @@ RSpec.describe 'Tasks', type: :system do
         select 'todo', from: 'Status'
         fill_in 'task[deadline]', with: Time.new(2040, 01, 02, 12)
         # Update Taskボタンをクリックする
-        click_button("Update Task")
+        click_button('Update Task')
         # タスクの新規作成に成功したことを検証する
         expect(page).to have_content 'Task was successfully updated.'
       end
@@ -75,7 +75,7 @@ RSpec.describe 'Tasks', type: :system do
   end
 
   describe 'ログイン前' do
-    context 'タスクの編集ページ' do
+    context 'タスクの編集ページへの' do
       it 'アクセスが失敗する' do
         Task.create!(title: '課題16', status: 0, user_id: 1)
         # タスクの新規作成画面を開く
@@ -89,8 +89,8 @@ RSpec.describe 'Tasks', type: :system do
   describe 'ログイン後' do
     let(:kotonoha) { create :user }
     let(:test_task) { create :task, user_id: 2 }
-    context '他のユーザーのタスク編集ページ' do
-      it 'アクセスが失敗' do
+    context '他のユーザーのタスク編集ページへの' do
+      it 'アクセスが失敗する' do
         # kotonohaとして操作
         login(kotonoha)
         # 他のユーザーのタスク編集ページを開く
