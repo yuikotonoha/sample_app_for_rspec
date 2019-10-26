@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Users', type: :system do
 
+  let(:kotonoha) { create :user }
+
   describe 'ログイン前' do
     context '入力値が正常' do
       it 'ユーザーの新規作成ができる' do
@@ -20,7 +22,6 @@ RSpec.describe 'Users', type: :system do
   end
 
   describe 'ログイン後' do
-    let(:kotonoha) { create :user }
     context '入力値が正常' do
       it 'ユーザーの編集ができる' do
         # kotonohaとして操作
@@ -40,7 +41,6 @@ RSpec.describe 'Users', type: :system do
   end
 
   describe 'ログイン後' do
-    let(:kotonoha) { create :user }
     context 'マイページにアクセス' do
       it '新規作成したタスクが表示されている' do
         # kotonohaとして操作
@@ -73,7 +73,6 @@ RSpec.describe 'Users', type: :system do
   end
 
   describe 'ログイン後' do
-    let(:kotonoha) { create :user }
     context 'メールアドレスが未入力時に' do
       it 'ユーザーの編集が失敗する' do
         # kotonohaとして操作
@@ -109,7 +108,6 @@ RSpec.describe 'Users', type: :system do
   end
 
   describe 'ログイン後' do
-    let(:kotonoha) { create :user }
     context '登録済メールアドレス使用時に' do
       it 'ユーザーの編集が失敗する' do
         User.create!(email: 'yukinoha@gmail.com', password: 'password', password_confirmation: 'password' )
@@ -140,7 +138,6 @@ RSpec.describe 'Users', type: :system do
   end
 
   describe 'ログイン後' do
-    let(:kotonoha) { create :user }
     context '他のユーザーの編集ページへの' do
       it 'アクセスが失敗する' do
         yukinoha = User.create!(email: 'yukinoha@gmail.com', password: 'password', password_confirmation: 'password' )
