@@ -110,4 +110,17 @@ RSpec.describe 'Users', type: :system do
       end
     end
   end
+
+  describe 'ログイン前' do
+    context 'マイページ' do
+      it 'アクセスが失敗' do
+        current_user = User.create!(email: 'kotonoha@gmail.com', password: 'password', password_confirmation: 'password' )
+        # ユーザー作成画面を開く
+        visit user_path(current_user)
+        # マイページへのアクセスが失敗したことを検証する
+        expect(page).to have_content "Login required"
+      end
+    end
+  end
+
 end
