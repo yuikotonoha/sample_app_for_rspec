@@ -77,9 +77,9 @@ RSpec.describe 'Tasks', type: :system do
   describe 'ログイン前' do
     context 'タスクの編集ページへの' do
       it 'アクセスが失敗する' do
-        Task.create!(title: '課題16', status: :todo)
+        test_task = Task.create!(title: '課題16', status: :todo)
         # タスクの新規作成画面を開く
-        visit edit_task_path(1)
+        visit edit_task_path(test_task)
         # タスクの新規作成にアクセスできないことを検証する
         expect(page).to have_content 'Login required'
       end
