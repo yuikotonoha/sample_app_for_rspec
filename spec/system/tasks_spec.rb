@@ -4,7 +4,7 @@ RSpec.describe 'Tasks', type: :system do
 
   let(:user) { create :user }
   let(:other_user) { create :user }
-  let(:test_task) { create :task, user_id: user.id }
+  let(:task) { create :task, user_id: user.id }
   let(:other_user_task) { create :task, user_id: other_user.id }
 
   describe 'ログイン前' do
@@ -25,7 +25,7 @@ RSpec.describe 'Tasks', type: :system do
       context '権限がない為' do
         it 'アクセスが失敗する' do
           # タスクの新規作成画面を開く
-          visit edit_task_path(test_task)
+          visit edit_task_path(task)
           # タスクの新規作成にアクセスできないことを検証する
           expect(page).to have_content 'Login required'
           # リダイレクト先のpathが正しいかを検証する
@@ -63,7 +63,7 @@ RSpec.describe 'Tasks', type: :system do
           # userとして操作
           login(user)
           # タスクの編集画面を開く
-          visit edit_task_path(test_task)
+          visit edit_task_path(task)
           # タスクの編集画面で入力をする
           fill_in 'task[title]', with: 'RUNTEQ応用課題16'
           fill_in 'task[content]', with: 'タスクを編集する'
