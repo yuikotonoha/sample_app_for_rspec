@@ -2,6 +2,7 @@ RSpec.describe 'Users', type: :system do
 
   let(:user) { create :user }
   let(:other_user) { create :user }
+  let(:task) { create :task, user_id: user.id }
 
   describe 'ログイン前' do
     describe 'サインアップ画面' do
@@ -144,11 +145,11 @@ RSpec.describe 'Users', type: :system do
           # userとして操作
           login(user)
           # タスクを1件作成
-          task_create
+          task
           # プロフィール編集を開く
           visit user_path(user)
           # 新規作成したタスクが表示されていることを検証する
-          expect(page).to have_content 'RUNTEQ応用課題16'
+          expect(page).to have_content 'RSpecの課題'
         end
       end
     end
