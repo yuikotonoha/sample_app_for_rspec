@@ -64,8 +64,8 @@ RSpec.describe 'Tasks', type: :system do
   end
 
   describe 'ログイン前' do
-    context 'タスクの新規作成ページ' do
-      it 'アクセスが失敗する' do
+    context '' do
+      it 'タスクの新規作成ページへアクセスが失敗する' do
         # タスクの新規作成画面を開く
         visit new_task_path
         # タスクの新規作成にアクセスできないことを検証する
@@ -75,8 +75,8 @@ RSpec.describe 'Tasks', type: :system do
   end
 
   describe 'ログイン前' do
-    context 'タスクの編集ページへの' do
-      it 'アクセスが失敗する' do
+    context '' do
+      it 'タスクの編集ページへアクセスが失敗する' do
         test_task = Task.create!(title: '課題16', status: :todo)
         # タスクの新規作成画面を開く
         visit edit_task_path(test_task)
@@ -88,8 +88,8 @@ RSpec.describe 'Tasks', type: :system do
 
   describe 'ログイン後' do
     let(:test_task) { create :task, user_id: yukinoha.id }
-    context '他のユーザーのタスク編集ページへの' do
-      it 'アクセスが失敗する' do
+    context '' do
+      it '他のユーザーのタスク編集ページへアクセスが失敗する' do
         # kotonohaとして操作
         login(kotonoha)
         # 他のユーザーのタスク編集ページを開く

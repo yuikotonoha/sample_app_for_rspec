@@ -126,8 +126,8 @@ RSpec.describe 'Users', type: :system do
   end
 
   describe 'ログイン前' do
-    context 'マイページへの' do
-      it 'アクセスが失敗する' do
+    context '' do
+      it 'マイページへアクセスが失敗する' do
         current_user = User.create!(email: 'kotonoha@gmail.com', password: 'password', password_confirmation: 'password' )
         # ユーザー作成画面を開く
         visit user_path(current_user)
@@ -138,8 +138,8 @@ RSpec.describe 'Users', type: :system do
   end
 
   describe 'ログイン後' do
-    context '他のユーザーの編集ページへの' do
-      it 'アクセスが失敗する' do
+    context '' do
+      it '他のユーザーの編集ページへアクセスが失敗する' do
         yukinoha = User.create!(email: 'yukinoha@gmail.com', password: 'password', password_confirmation: 'password' )
         # kotonohaとして操作
         login(kotonoha)
