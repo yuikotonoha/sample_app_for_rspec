@@ -95,7 +95,6 @@ RSpec.describe 'Tasks', type: :system do
         it 'タスクの削除ができる' do
           # userとして操作
           login(user)
-          task
           # タスク一覧画面を開く
           visit root_path
           # Destroyボタンをクリックする
