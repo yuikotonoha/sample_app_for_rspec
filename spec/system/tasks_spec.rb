@@ -48,11 +48,12 @@ RSpec.describe 'Tasks', type: :system do
   end
 
   describe 'ログイン後' do
+    let!(:task) { create :task, user_id: user.id }
     context 'タスク一覧で Destroy のリンクをクリックすれば' do
       it 'タスクの削除ができる' do
         # userとして操作
         login(user)
-        Task.create!(title: '課題16', status: :todo, user_id: user.id)
+        task
         # タスク一覧画面を開く
         visit root_path
         # Destroyボタンをクリックする
@@ -76,9 +77,9 @@ RSpec.describe 'Tasks', type: :system do
   end
 
   describe 'ログイン前' do
+    let(:test_task) { create :task, user_id: user.id }
     context '' do
       it 'タスクの編集ページへアクセスが失敗する' do
-        test_task = Task.create!(title: '課題16', status: :todo)
         # タスクの新規作成画面を開く
         visit edit_task_path(test_task)
         # タスクの新規作成にアクセスできないことを検証する
@@ -88,13 +89,13 @@ RSpec.describe 'Tasks', type: :system do
   end
 
   describe 'ログイン後' do
-    let(:test_task) { create :task, user_id: other_user.id }
+    let(:other_user_task) { create :task, user_id: other_user.id }
     context '' do
       it '他のユーザーのタスク編集ページへアクセスが失敗する' do
         # userとして操作
         login(user)
         # 他のユーザーのタスク編集ページを開く
-        visit edit_task_path(test_task)
+        visit edit_task_path(other_user_task)
         # 他のユーザーのタスク編集ページにアクセスが失敗したことを検証する
         expect(page).to have_content 'Forbidden access.'
       end
