@@ -4,6 +4,8 @@ RSpec.describe 'Tasks', type: :system do
 
   let(:user) { create :user }
   let(:other_user) { create :user }
+  let(:test_task) { create :task, user_id: user.id }
+  let(:other_user_task) { create :task, user_id: other_user.id }
 
   describe 'ログイン後' do
     context '入力値が正常' do
@@ -27,7 +29,6 @@ RSpec.describe 'Tasks', type: :system do
   end
 
   describe 'ログイン後' do
-    let(:test_task) { create :task, user_id: user.id }
     context '入力値が正常' do
       it 'タスクの編集ができる' do
         # userとして操作
@@ -79,7 +80,6 @@ RSpec.describe 'Tasks', type: :system do
   end
 
   describe 'ログイン前' do
-    let(:test_task) { create :task, user_id: user.id }
     context '' do
       it 'タスクの編集ページへアクセスが失敗する' do
         # タスクの新規作成画面を開く
@@ -93,7 +93,6 @@ RSpec.describe 'Tasks', type: :system do
   end
 
   describe 'ログイン後' do
-    let(:other_user_task) { create :task, user_id: other_user.id }
     context '' do
       it '他のユーザーのタスク編集ページへアクセスが失敗する' do
         # userとして操作
