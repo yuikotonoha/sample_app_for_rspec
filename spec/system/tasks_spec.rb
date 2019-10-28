@@ -2,14 +2,14 @@ require 'rails_helper'
 
 RSpec.describe 'Tasks', type: :system do
 
-  let(:kotonoha) { create :user }
-  let(:yukinoha) { create :user }
+  let(:user) { create :user }
+  let(:other_user) { create :user }
 
   describe 'ログイン後' do
     context '入力値が正常' do
       it 'タスクの新規作成ができる' do
-        # kotonohaとして操作
-        login(kotonoha)
+        # userとして操作
+        login(user)
         # タスクの新規作成画面を開く
         visit new_task_path
         # タスクの新規作成画面で入力をする
@@ -26,11 +26,11 @@ RSpec.describe 'Tasks', type: :system do
   end
 
   describe 'ログイン後' do
-    let(:test_task) { create :task, user_id: kotonoha.id }
+    let(:test_task) { create :task, user_id: user.id }
     context '入力値が正常' do
       it 'タスクの編集ができる' do
-        # kotonohaとして操作
-        login(kotonoha)
+        # userとして操作
+        login(user)
         # タスクの編集画面を開く
         visit edit_task_path(test_task)
         # タスクの編集画面で入力をする
@@ -49,9 +49,9 @@ RSpec.describe 'Tasks', type: :system do
   describe 'ログイン後' do
     context 'タスク一覧で Destroy のリンクをクリックすれば' do
       it 'タスクの削除ができる' do
-        # kotonohaとして操作
-        login(kotonoha)
-        Task.create!(title: '課題16', status: :todo, user_id: kotonoha.id)
+        # userとして操作
+        login(user)
+        Task.create!(title: '課題16', status: :todo, user_id: user.id)
         # タスク一覧画面を開く
         visit root_path
         # Destroyボタンをクリックする
@@ -87,11 +87,11 @@ RSpec.describe 'Tasks', type: :system do
   end
 
   describe 'ログイン後' do
-    let(:test_task) { create :task, user_id: yukinoha.id }
+    let(:test_task) { create :task, user_id: other_user.id }
     context '' do
       it '他のユーザーのタスク編集ページへアクセスが失敗する' do
-        # kotonohaとして操作
-        login(kotonoha)
+        # userとして操作
+        login(user)
         # 他のユーザーのタスク編集ページを開く
         visit edit_task_path(test_task)
         # 他のユーザーのタスク編集ページにアクセスが失敗したことを検証する
