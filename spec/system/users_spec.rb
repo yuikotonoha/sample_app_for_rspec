@@ -94,8 +94,6 @@ RSpec.describe 'Users', type: :system do
         it 'ユーザーの編集が失敗する' do
           # userとして操作
           login(user)
-          # user_email = user.email
-          # binding.pry
           # プロフィール編集を開く
           visit edit_user_path(user)
           # プロフィール編集で入力をする
@@ -128,6 +126,18 @@ RSpec.describe 'Users', type: :system do
           expect(page).to have_content user.email
         end
       end
+      context '権限がない為' do
+        it '他のユーザーの編集ページにアクセスが失敗する' do
+          # userとして操作
+          login(user)
+          # プロフィール編集を開く
+          visit edit_user_path(other_user)
+          # 他のユーザーのプロフィール編集ページへアクセスが失敗したことを検証する
+          expect(page).to have_content 'Forbidden access.'
+          # リダイレクト先のpathが正しいかを検証する
+          expect(user_path(user)).to eq current_path
+        end
+      end
     end
 
     describe 'マイページ' do
@@ -141,21 +151,6 @@ RSpec.describe 'Users', type: :system do
           visit user_path(user)
           # 新規作成したタスクが表示されていることを検証する
           expect(page).to have_content 'RUNTEQ応用課題16'
-        end
-      end
-    end
-
-    describe '他のユーザーの編集ページ' do
-      context '権限がない為' do
-        it 'アクセスが失敗する' do
-          # userとして操作
-          login(user)
-          # プロフィール編集を開く
-          visit edit_user_path(other_user)
-          # 他のユーザーのプロフィール編集ページへアクセスが失敗したことを検証する
-          expect(page).to have_content 'Forbidden access.'
-          # リダイレクト先のpathが正しいかを検証する
-          expect(user_path(user)).to eq current_path
         end
       end
     end
