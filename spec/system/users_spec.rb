@@ -103,6 +103,10 @@ RSpec.describe 'Users', type: :system do
         click_button('SignUp')
         # ユーザー作成が失敗したことを検証する
         expect(page).to have_content 'Email has already been taken'
+        # タスク作成画面へアクセスを試みる
+        visit new_task_path
+        # タスクの新規作成画面にアクセスできないことを検証する
+        expect(page).to have_content 'Login required'
       end
     end
   end
