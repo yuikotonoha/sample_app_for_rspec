@@ -78,6 +78,8 @@ RSpec.describe 'Users', type: :system do
       it 'ユーザーの編集が失敗する' do
         # userとして操作
         login(user)
+        user_email = user.email
+        # binding.pry
         # プロフィール編集を開く
         visit edit_user_path(user)
         # プロフィール編集で入力をする
@@ -88,6 +90,8 @@ RSpec.describe 'Users', type: :system do
         click_button('Update')
         # プロフィール更新が失敗したことを検証する
         expect(page).to have_content "Email can't be blank"
+        # メールアドレスが変更されていないことを確認する
+        expect(user.email).to eq user_email
       end
     end
   end
