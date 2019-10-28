@@ -3,16 +3,14 @@ require 'rails_helper'
 RSpec.describe 'Users', type: :system do
 
   describe 'ログイン前' do
-    before do
-      # ユーザを作成する
-      create(:user)
-    end
+    # ユーザを作成する
+    let(:user) { create :user }
     context '入力値が正常' do
       it 'ログインが成功する' do
         # トップページを開く
         visit login_path
         # ログインフォームにEmailとパスワードを入力する
-        fill_in 'email', with: 'kotonoha@gmail.com'
+        fill_in 'email', with: user.email
         fill_in 'password', with: 'password'
         # ログインボタンをクリックする
         click_button('Login')

@@ -19,6 +19,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'capybara'
   gem 'webdrivers'
+  gem 'faker'
 end
 
 group :development do

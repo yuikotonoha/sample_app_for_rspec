@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Tasks', type: :system do
 
   let(:kotonoha) { create :user }
-  let(:yukinoha) { create :yukinoha }
+  let(:yukinoha) { create :user }
 
   describe 'ログイン後' do
     context '入力値が正常' do
