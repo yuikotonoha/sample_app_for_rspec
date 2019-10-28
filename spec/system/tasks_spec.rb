@@ -72,6 +72,8 @@ RSpec.describe 'Tasks', type: :system do
         visit new_task_path
         # タスクの新規作成にアクセスできないことを検証する
         expect(page).to have_content 'Login required'
+        # リダイレクト先のpathが正しいかを検証する
+        expect(login_path).to eq current_path
       end
     end
   end
@@ -84,6 +86,8 @@ RSpec.describe 'Tasks', type: :system do
         visit edit_task_path(test_task)
         # タスクの新規作成にアクセスできないことを検証する
         expect(page).to have_content 'Login required'
+        # リダイレクト先のpathが正しいかを検証する
+        expect(login_path).to eq current_path
       end
     end
   end
@@ -98,6 +102,8 @@ RSpec.describe 'Tasks', type: :system do
         visit edit_task_path(other_user_task)
         # 他のユーザーのタスク編集ページにアクセスが失敗したことを検証する
         expect(page).to have_content 'Forbidden access.'
+        # リダイレクト先のpathが正しいかを検証する
+        expect(root_path).to eq current_path
       end
     end
   end

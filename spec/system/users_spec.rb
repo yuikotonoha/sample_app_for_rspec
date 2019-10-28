@@ -50,7 +50,7 @@ RSpec.describe 'Users', type: :system do
         task_create
         # プロフィール編集を開く
         visit user_path(user)
-        # 他のユーザーのプロフィール編集ページへアクセスが失敗したことを検証する
+        # 新規作成したタスクが表示されていることを検証する
         expect(page).to have_content 'RUNTEQ応用課題16'
       end
     end
@@ -69,6 +69,8 @@ RSpec.describe 'Users', type: :system do
         click_button('SignUp')
         # ユーザー作成が失敗したことを検証する
         expect(page).to have_content "Email can't be blank"
+        # リダイレクト先のpathが正しいかを検証する
+        expect(users_path).to eq current_path
       end
     end
   end
@@ -78,7 +80,7 @@ RSpec.describe 'Users', type: :system do
       it 'ユーザーの編集が失敗する' do
         # userとして操作
         login(user)
-        user_email = user.email
+        # user_email = user.email
         # binding.pry
         # プロフィール編集を開く
         visit edit_user_path(user)
@@ -91,7 +93,8 @@ RSpec.describe 'Users', type: :system do
         # プロフィール更新が失敗したことを検証する
         expect(page).to have_content "Email can't be blank"
         # メールアドレスが変更されていないことを確認する
-        expect(user.email).to eq user_email
+        visit user_path(user)
+        expect(page).to have_content user.email
       end
     end
   end
@@ -111,6 +114,8 @@ RSpec.describe 'Users', type: :system do
         visit new_task_path
         # タスクの新規作成画面にアクセスできないことを検証する
         expect(page).to have_content 'Login required'
+        # リダイレクト先のpathが正しいかを検証する
+        expect(login_path).to eq current_path
       end
     end
   end
@@ -128,6 +133,9 @@ RSpec.describe 'Users', type: :system do
         click_button('Update')
         # プロフィール更新が失敗したことを検証する
         expect(page).to have_content 'Email has already been taken'
+        # メールアドレスが変更されていないことを確認する
+        visit user_path(user)
+        expect(page).to have_content user.email
       end
     end
   end
@@ -140,6 +148,8 @@ RSpec.describe 'Users', type: :system do
         visit user_path(current_user)
         # マイページへのアクセスが失敗したことを検証する
         expect(page).to have_content 'Login required'
+        # リダイレクト先のpathが正しいかを検証する
+        expect(login_path).to eq current_path
       end
     end
   end
@@ -153,6 +163,8 @@ RSpec.describe 'Users', type: :system do
         visit edit_user_path(other_user)
         # 他のユーザーのプロフィール編集ページへアクセスが失敗したことを検証する
         expect(page).to have_content 'Forbidden access.'
+        # リダイレクト先のpathが正しいかを検証する
+        expect(user_path(user)).to eq current_path
       end
     end
   end

@@ -34,8 +34,10 @@ RSpec.describe 'Users', type: :system do
         fill_in 'password', with: ''
         # ログインボタンをクリックする
         click_button('Login')
-        # ログインに成功したことを検証する
+        # ログインに失敗したことを検証する
         expect(page).to have_content 'Login failed'
+        # リダイレクト先のpathが正しいかを検証する
+        expect(login_path).to eq current_path
       end
     end
   end
