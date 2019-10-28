@@ -21,6 +21,7 @@ RSpec.describe 'Tasks', type: :system do
         click_button('Create Task')
         # タスクの新規作成に成功したことを検証する
         expect(page).to have_content 'Task was successfully created.'
+        expect(page).to have_content 'RUNTEQ応用課題16'
       end
     end
   end
